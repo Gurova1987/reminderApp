@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using Auth.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Auth.API.Controllers
@@ -14,6 +15,13 @@ namespace Auth.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+
+        private readonly IOptions<Audience> _settings;
+
+        public AuthController(IOptions<Audience> settings)
+        {
+            _settings = settings;
+        }
 
         //POST api/[controller]/
         [Route("")]
@@ -24,6 +32,7 @@ namespace Auth.API.Controllers
         {
             if (!model.Username.Equals("test") || !model.Password.Equals("pass123")) return Unauthorized();
             var now = DateTime.UtcNow;
+
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, model.Username),
@@ -31,12 +40,10 @@ namespace Auth.API.Controllers
                 new Claim(JwtRegisteredClaimNames.Iat, now.ToUniversalTime().ToString(CultureInfo.InvariantCulture), ClaimValueTypes.Integer64)
             };
 
-            //TODO: Make secretkey configurable
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret1234567891011121314151617181920"));
-
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_settings.Value.Secret));
             var jwt = new JwtSecurityToken(
-                issuer: "Iss",
-                audience: "Aud",
+                issuer: _settings.Value.Iss,
+                audience: _settings.Value.Aud,
                 claims: claims,
                 notBefore: now,
                 expires: now.Add(TimeSpan.FromMinutes(2)),
@@ -46,7 +53,7 @@ namespace Auth.API.Controllers
             var responseJson = new
             {
                 access_token = encodedJwt,
-                expires_in = (int)TimeSpan.FromMinutes(5).TotalSeconds
+                expires_in = (int)TimeSpan.FromMinutes(2).TotalSeconds
             };
 
             return Ok(responseJson);

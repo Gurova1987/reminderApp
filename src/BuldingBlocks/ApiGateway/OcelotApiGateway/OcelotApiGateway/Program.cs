@@ -15,6 +15,8 @@ namespace OcelotApiGateway
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(
                     ic => ic.AddJsonFile("configuration.json", optional: false, reloadOnChange: true))
+                .ConfigureAppConfiguration(
+                    ic => ic.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
                 .UseUrls("http://localhost:9000")
                 .UseStartup<Startup>();
     }

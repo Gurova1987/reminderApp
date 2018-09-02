@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace Auth.API
 {
@@ -12,6 +13,8 @@ namespace Auth.API
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(
+                    ic => ic.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
                 .UseUrls("http://localhost:9002")
                 .UseStartup<Startup>();
     }

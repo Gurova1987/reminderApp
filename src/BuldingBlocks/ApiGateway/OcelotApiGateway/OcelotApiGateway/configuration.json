@@ -1,7 +1,7 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/v1/{everything}",
+      "DownstreamPathTemplate": "/api/v1/values",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,8 +9,12 @@
           "Port": 9001
         }
       ],
-      "UpstreamPathTemplate": "/a/api/{everything}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamPathTemplate": "/a/api/v1/values",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",

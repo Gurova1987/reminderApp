@@ -25,16 +25,16 @@ namespace OcelotApiGateway
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            //TODO: Make secretkey configurable
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret1234567891011121314151617181920"));
+            var audienceConfig = Configuration.GetSection("Audience");
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(audienceConfig["Secret"]));
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = signingKey,
                 ValidateIssuer = true,
-                ValidIssuer = "Iss",
+                ValidIssuer = audienceConfig["Iss"],
                 ValidateAudience = true,
-                ValidAudience = "Aud",
+                ValidAudience = audienceConfig["Aud"],
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero,
                 RequireExpirationTime = true,
@@ -47,7 +47,7 @@ namespace OcelotApiGateway
                     x.TokenValidationParameters = tokenValidationParameters;
                 });
 
-            services.AddOcelot();
+            services.AddOcelot(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
