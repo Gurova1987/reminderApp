@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
-using EventBus.Abstractions;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Reminder.BackgroundTasks.Configuration;
 
@@ -15,18 +14,20 @@ namespace Reminder.BackgroundTasks.Tasks
     public class ReminderTask: BackgroundService
     {
         private readonly BackgroundTaskSettings _settings;
+        private readonly ILogger<ReminderTask> _logger;
+        // TODO: Implement event bus to deliver reminders
         //private readonly IEventBus _eventBus;
 
-        public ReminderTask(IOptions<BackgroundTaskSettings> settings)
+        public ReminderTask(IOptions<BackgroundTaskSettings> settings, ILogger<ReminderTask> logger)
         {
             _settings = settings?.Value ?? throw new ArgumentNullException(nameof(settings));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             //_eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            stoppingToken.Register(() => //_logger.LogDebug($"#1 GracePeriodManagerService background task is stopping.")
-                                          string.Empty.ToString());
+            stoppingToken.Register(() => _logger.LogDebug("Reminder background task is stopping."));
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -35,25 +36,21 @@ namespace Reminder.BackgroundTasks.Tasks
                 await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
             }
 
-            //_logger.LogDebug($"GracePeriodManagerService background task is stopping.");
-
             await Task.CompletedTask;
         }
 
-        private IEnumerable<int> DeliverReminders()
+        private void DeliverReminders()
         {
-            IEnumerable<int> reminderIds = new List<int>();
-
             using (var conn = new SqlConnection(_settings.ConnectionString))
             {
                 try
                 {
                     conn.Open();
-                    reminderIds = conn.Query<int>(
+                    var reminderIds = conn.Query<int>(
                         @"SELECT Id FROM [Reminders] 
                             WHERE DATEDIFF(minute, [Date], GETDATE()) >= @PeriodTime
                             AND [IsComplete] != 1 OR [IsComplete] IS NULL",
-                        new {PeriodTime = _settings.PeriodTime});
+                        new {_settings.PeriodTime}).ToArray();
 
                     // TODO: Here resides the logic to send the emails
                     const string sqlInsert = "INSERT INTO DeliveredReminders (ReminderId, DeliveredDate) Values (@ReminderId, @DeliveredDate);";
@@ -65,13 +62,9 @@ namespace Reminder.BackgroundTasks.Tasks
                 }
                 catch (SqlException exception)
                 {
-                    var temp = string.Empty;
-                    // _logger.LogCritical($"FATAL ERROR: Database connections could not be opened: {exception.Message}");
+                    _logger.LogCritical($"FATAL ERROR: Database connections could not be opened: {exception.Message}");
                 }
-
             }
-
-            return reminderIds;
         }
     }
 }

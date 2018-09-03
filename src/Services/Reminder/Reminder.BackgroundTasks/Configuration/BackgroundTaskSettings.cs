@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Reminder.BackgroundTasks.Configuration
+﻿namespace Reminder.BackgroundTasks.Configuration
 {
     public class BackgroundTaskSettings
     {
