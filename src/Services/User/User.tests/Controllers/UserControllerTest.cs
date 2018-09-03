@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Reminder.API.Controllers;
-using System;
-using Reminder.API.Infrastructure;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using User.API.Controllers;
+using User.API.Infrastructure;
 
-namespace Reminder.tests.Controllers
+namespace User.tests.Controllers
 {
-    public class ReminderControllerTest
+    public class UserControllerTest
     {
 
         [TestInitialize]
@@ -16,10 +16,23 @@ namespace Reminder.tests.Controllers
         }
 
         //[TestMethod]
-        //public void GetById_ExistingReminder_ReturnSuccess()
+        //public async void GetById_ExistingUser_ReturnSuccess()
         //{
         //    // Arrange
-        //    var controller = new ReminderController(GetContextWithData());
+        //    var controller = new UserController(GetContextWithData());
+
+        //    // Act
+        //    var result = await controller.GetById(1);
+
+        //    // Assert
+        //    Assert.AreEqual("Test", result.ToString());
+        //}
+
+        //[TestMethod]
+        //public void GetById_NotExistingUser_ReturnNotFound()
+        //{
+        //    // Arrange
+        //    var controller = new UserController(GetContextWithData());
 
         //    // Act
         //    var result = controller.GetById(1);
@@ -29,10 +42,10 @@ namespace Reminder.tests.Controllers
         //}
 
         //[TestMethod]
-        //public void GetById_NotExistingReminder_ReturnNotFound()
+        //public void CreateUser_ValidParameters_ReminderCreated()
         //{
         //    // Arrange
-        //    var controller = new ReminderController(GetContextWithData());
+        //    var controller = new UserController(GetContextWithData());
 
         //    // Act
         //    var result = controller.GetById(1);
@@ -42,10 +55,10 @@ namespace Reminder.tests.Controllers
         //}
 
         //[TestMethod]
-        //public void CreateReminder_ValidParameters_ReminderCreated()
+        //public void GetUsers_ExistingUsers_ReturnListSuccessfully()
         //{
         //    // Arrange
-        //    var controller = new ReminderController(GetContextWithData());
+        //    var controller = new UserController(GetContextWithData());
 
         //    // Act
         //    var result = controller.GetById(1);
@@ -54,28 +67,15 @@ namespace Reminder.tests.Controllers
         //    Assert.AreEqual("Test", result.ToString());
         //}
 
-        //[TestMethod]
-        //public void GetReminders_ExistingRemainders_ReturnListSuccessfully()
+        //private UserContext GetContextWithData()
         //{
-        //    // Arrange
-        //    var controller = new ReminderController(GetContextWithData());
-
-        //    // Act
-        //    var result = controller.GetById(1);
-
-        //    // Assert
-        //    Assert.AreEqual("Test", result.ToString());
-        //}
-
-        //private ReminderContext GetContextWithData()
-        //{
-        //    var options = new DbContextOptionsBuilder<ReminderContext>()
+        //    var options = new DbContextOptionsBuilder<UserContext>()
         //        .UseInMemoryDatabase(Guid.NewGuid().ToString())
         //        .Options;
-        //    var context = new ReminderContext(options);
+        //    var context = new UserContext(options);
 
-        //    var reminder = new API.Model.Reminder { Id = 1, Message = "Test", EmailTo = "Test@email.com", UserId = 1};
-        //    context.Reminders.Add(reminder);
+        //    var user = new API.Models.User { Id = 1, Username = "Test", Email = "Test@email.com" };
+        //    context.Users.Add(User);
         //    context.SaveChanges();
 
         //    return context;
