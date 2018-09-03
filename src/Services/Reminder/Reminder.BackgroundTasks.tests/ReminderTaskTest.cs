@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Reminder.tests
+namespace Reminder.BackgroundTasks.tests
 {
     [TestClass]
-    public class UnitTest1
+    public class ReminderTaskTest
     {
         [TestMethod]
         public void TestMethod1()

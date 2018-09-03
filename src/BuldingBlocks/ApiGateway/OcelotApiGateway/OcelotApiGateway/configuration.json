@@ -9,7 +9,29 @@
           "Port": 9001
         }
       ],
-      "UpstreamPathTemplate": "/api/{version}/gateway/{everything}",
+      "UpstreamPathTemplate": "/api/{version}/a/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "UserId": "Claims[UserId] > value"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Administrator"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9004
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/b/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "TestKey",
@@ -31,7 +53,7 @@
           "Port": 9002
         }
       ],
-      "UpstreamPathTemplate": "/b/api/{everything}",
+      "UpstreamPathTemplate": "/c/api/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     }
 

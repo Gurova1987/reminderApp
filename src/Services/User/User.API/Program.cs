@@ -19,6 +19,10 @@ namespace User.API
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://localhost:9001")
+                .UseKestrel()
+                .UseHealthChecks("/hc")
+                .UseIISIntegration()
                 .UseStartup<Startup>();
     }
 }

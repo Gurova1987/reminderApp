@@ -45,13 +45,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B9A57964-04A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthStatus", "src\Web\HealthStatus\HealthStatus.csproj", "{F41D0B87-1489-4269-986C-30F9E185DC97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reminder.tests", "src\Services\Reminder\Reminder.tests\Reminder.tests.csproj", "{0B18EF87-9DA9-4D83-B208-EF1787CC819F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.tests", "src\Services\Reminder\Reminder.tests\Reminder.tests.csproj", "{0B18EF87-9DA9-4D83-B208-EF1787CC819F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User.tests", "src\Services\User\User.tests\User.tests.csproj", "{E0535941-D930-4B2F-9885-A41E0F789301}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "User.tests", "src\Services\User\User.tests\User.tests.csproj", "{E0535941-D930-4B2F-9885-A41E0F789301}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.BackgroundTasks.tests", "src\Services\Reminder\Reminder.BackgroundTasks.tests\Reminder.BackgroundTasks.tests.csproj", "{F36C9E06-DE5B-452D-A4C2-F2BA2E75E8C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.tests", "src\Services\Auth\Auth.tests\Auth.tests.csproj", "{F44CD0DC-9910-42E9-867C-9C51B216DD60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.tests", "src\Services\Auth\Auth.tests\Auth.tests.csproj", "{F44CD0DC-9910-42E9-867C-9C51B216DD60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
