@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Reminder.API.Controllers
@@ -19,7 +15,6 @@ namespace Reminder.API.Controllers
         }
 
         // GET api/values/5
-        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {

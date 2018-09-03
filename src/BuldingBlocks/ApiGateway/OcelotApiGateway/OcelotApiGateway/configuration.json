@@ -1,7 +1,7 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/v1/values",
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,11 +9,17 @@
           "Port": 9001
         }
       ],
-      "UpstreamPathTemplate": "/a/api/v1/values",
+      "UpstreamPathTemplate": "/api/{version}/gateway/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "TestKey",
         "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "UserId": "Claims[UserId] > value"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Administrator"
       }
     },
     {

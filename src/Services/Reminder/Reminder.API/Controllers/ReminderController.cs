@@ -21,8 +21,6 @@ namespace Reminder.API.Controllers
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        //POST api/v1/[controller]/
-        [Authorize]
         [Route("")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Created)]
@@ -41,7 +39,6 @@ namespace Reminder.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = reminderNotification.Id }, null);
         }
 
-        //[Authorize]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -53,12 +50,30 @@ namespace Reminder.API.Controllers
                 return BadRequest();
             }
 
-            var item = await _reminderContext.Reminders.SingleOrDefaultAsync(ci => ci.Id == id);
+            try
+            {
+                var item = await _reminderContext.Reminders.SingleOrDefaultAsync(ci => ci.Id == id);
 
-            if (item != null)
-                return Ok(item);
+                if (item != null)
+                    return Ok(item);
 
-            return NotFound();
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return Ok(e);
+            }
+            
+        }
+
+        [HttpGet]
+        [Route("")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetAll()
+        {
+            var items = await _reminderContext.Reminders.ToListAsync();
+            return Ok(items);
         }
     }
 }

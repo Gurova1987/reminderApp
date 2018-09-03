@@ -35,6 +35,8 @@ namespace Auth.API.Controllers
 
             var claims = new[]
             {
+                new Claim("Role", "Administrator"),
+                new Claim("UserId", "1"), // TODO: Information needs to be pulled from User Service
                 new Claim(JwtRegisteredClaimNames.Sub, model.Username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, now.ToUniversalTime().ToString(CultureInfo.InvariantCulture), ClaimValueTypes.Integer64)
