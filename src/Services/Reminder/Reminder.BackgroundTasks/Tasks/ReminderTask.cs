@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
@@ -14,16 +15,15 @@ namespace Reminder.BackgroundTasks.Tasks
     public class ReminderTask: BackgroundService
     {
         private readonly BackgroundTaskSettings _settings;
-        private readonly IEventBus _eventBus;
+        //private readonly IEventBus _eventBus;
 
-        public ReminderTask(IOptions<BackgroundTaskSettings> settings,
-            IEventBus eventBus)
+        public ReminderTask(IOptions<BackgroundTaskSettings> settings)
         {
             _settings = settings?.Value ?? throw new ArgumentNullException(nameof(settings));
-            _eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
+            //_eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
         }
 
-        protected override async System.Threading.Tasks.Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             stoppingToken.Register(() => //_logger.LogDebug($"#1 GracePeriodManagerService background task is stopping.")
                                           string.Empty.ToString());
@@ -50,14 +50,23 @@ namespace Reminder.BackgroundTasks.Tasks
                 {
                     conn.Open();
                     reminderIds = conn.Query<int>(
-                        @"SELECT Id FROM [ordering].[orders] 
-                            WHERE DATEDIFF(minute, [OrderDate], GETDATE()) >= @GracePeriodTime
-                            AND [OrderStatusId] = 1",
-                        new { GracePeriodTime = _settings.GracePeriodTime });
+                        @"SELECT Id FROM [Reminders] 
+                            WHERE DATEDIFF(minute, [Date], GETDATE()) >= @PeriodTime
+                            AND [IsComplete] != 1 OR [IsComplete] IS NULL",
+                        new {PeriodTime = _settings.PeriodTime});
+
+                    // TODO: Here resides the logic to send the emails
+                    const string sqlInsert = "INSERT INTO DeliveredReminders (ReminderId, DeliveredDate) Values (@ReminderId, @DeliveredDate);";
+                    const string sqlUpdate = "UPDATE Reminders SET IsComplete = 1 WHERE Id = @Id;";
+                    var affectedRows = reminderIds.Select(x => new {ReminderId = x, DeliveredDate = DateTime.Now});
+                    var updatedRows = reminderIds.Select(x => new {Id = x});
+                    conn.Execute(sqlInsert, affectedRows);
+                    conn.Execute(sqlUpdate, updatedRows);
                 }
                 catch (SqlException exception)
                 {
-                   // _logger.LogCritical($"FATAL ERROR: Database connections could not be opened: {exception.Message}");
+                    var temp = string.Empty;
+                    // _logger.LogCritical($"FATAL ERROR: Database connections could not be opened: {exception.Message}");
                 }
 
             }

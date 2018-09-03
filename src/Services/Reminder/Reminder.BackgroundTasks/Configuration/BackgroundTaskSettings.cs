@@ -1,4 +1,6 @@
-﻿namespace Reminder.BackgroundTasks.Configuration
+﻿using System;
+
+namespace Reminder.BackgroundTasks.Configuration
 {
     public class BackgroundTaskSettings
     {
@@ -6,7 +8,7 @@
 
         public string EventBusConnection { get; set; }
 
-        public int GracePeriodTime { get; set; }
+        public int PeriodTime { get; set; }
 
         public int CheckUpdateTime { get; set; }
     }
