@@ -20,7 +20,16 @@
       },
       "RouteClaimsRequirement": {
         "Role": "Administrator"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 5,
+        "TimeoutValue": 5000
       }
+      //"ServiceName": "Reminder",
+      //"LoadBalancerOptions": {
+      //  "Type": "LeastConnection"
+      //}
     },
     {
       "DownstreamPathTemplate": "/api/{version}/{everything}",
@@ -42,7 +51,16 @@
       },
       "RouteClaimsRequirement": {
         "Role": "Administrator"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 5,
+        "TimeoutValue": 5000
       }
+      //"ServiceName": "User",
+      //"LoadBalancerOptions": {
+      //  "Type": "LeastConnection"
+      //}
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -54,12 +72,26 @@
         }
       ],
       "UpstreamPathTemplate": "/c/api/{everything}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 5,
+        "TimeoutValue": 5000
+      }
+      //"ServiceName": "Auth",
+      //"LoadBalancerOptions": {
+      //  "Type": "LeastConnection"
+      //}
     }
 
   ],
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId",
-    "AdministrationPath": "/administration"
+    "AdministrationPath": "/administration",
+    //"ServiceDiscoveryProvider": {
+    //  "Host": "localhost",
+    //  "Port": 8500,
+    //  "Type": "Consul"
+    //}
   }
 }
