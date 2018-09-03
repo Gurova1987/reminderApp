@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Reminder.BackgroundTasks.Configuration;
 using Reminder.BackgroundTasks.Tasks;
@@ -28,6 +29,11 @@ namespace Reminder.BackgroundTasks
 
             // Configure background task
             services.AddSingleton<IHostedService, ReminderTask>();
+
+            services.AddHealthChecks(checks =>
+            {
+                checks.AddSqlCheck("ReminderDb", Configuration["ConnectionString"]);
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

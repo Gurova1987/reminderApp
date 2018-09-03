@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Text;
-using EventBus.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Reminder.API.Infrastructure;
-using Reminder.API.IntegrationEvents.EventHandling;
-using Reminder.API.IntegrationEvents.Events;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Reminder.API
@@ -49,6 +47,11 @@ namespace Reminder.API
                 // Default in EFCore would be to log warning when client evaluation is done.
                 options.ConfigureWarnings(warnings => warnings.Throw(
                     RelationalEventId.QueryClientEvaluationWarning));
+            });
+
+            services.AddHealthChecks(checks =>
+            {
+                checks.AddSqlCheck("ReminderDb", Configuration["ConnectionString"]);
             });
 
             services.AddSwaggerGen(c =>

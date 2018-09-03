@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.API", "src\Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBusRabbitMQ", "src\BuldingBlocks\EventBus\EventBusRabbitMQ\EventBusRabbitMQ.csproj", "{C4E688D3-08DC-4C42-B540-5CB7ADD09499}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebHost", "WebHost", "{D5164CF9-77F9-4A22-A443-67D457B04C8A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthChecks", "HealthChecks", "{D5164CF9-77F9-4A22-A443-67D457B04C8A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus", "src\BuldingBlocks\EventBus\EventBus\EventBus.csproj", "{D516FC66-80AD-41CE-8683-F149865FA8D1}"
 EndProject
@@ -29,11 +29,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "src\Bul
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{56E6CB5C-7400-44F7-B09A-87CD1CC608DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.API", "src\Services\Auth\Auth.API\Auth.API.csproj", "{DD59E53A-EA47-4967-8FF4-CEC43918F23B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.API", "src\Services\Auth\Auth.API\Auth.API.csproj", "{DD59E53A-EA47-4967-8FF4-CEC43918F23B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{2C2101CB-18AE-44D6-8719-D6BB43F665B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User.API", "src\Services\User\User.API\User.API.csproj", "{0B3D7AC2-DF49-4119-B71D-E0D8BFD228BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "User.API", "src\Services\User\User.API\User.API.csproj", "{0B3D7AC2-DF49-4119-B71D-E0D8BFD228BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.HealthChecks", "src\BuldingBlocks\HealthChecks\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj", "{99795CB1-0A2F-400D-9BDC-BDF40A73E3DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.HealthChecks", "src\BuldingBlocks\HealthChecks\Microsoft.Extensions.HealthChecks\Microsoft.Extensions.HealthChecks.csproj", "{9273DA66-DA6F-4DD0-8240-110EDB36132A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.HealthChecks.SqlServer", "src\BuldingBlocks\HealthChecks\Microsoft.Extensions.HealthChecks.SqlServer\Microsoft.Extensions.HealthChecks.SqlServer.csproj", "{98D50D2C-65D0-485E-8B6B-FDCA0BB616BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B9A57964-04A6-4DCF-B2AD-525642C12CB1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthStatus", "src\Web\HealthStatus\HealthStatus.csproj", "{F41D0B87-1489-4269-986C-30F9E185DC97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +79,22 @@ Global
 		{0B3D7AC2-DF49-4119-B71D-E0D8BFD228BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B3D7AC2-DF49-4119-B71D-E0D8BFD228BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B3D7AC2-DF49-4119-B71D-E0D8BFD228BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99795CB1-0A2F-400D-9BDC-BDF40A73E3DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99795CB1-0A2F-400D-9BDC-BDF40A73E3DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99795CB1-0A2F-400D-9BDC-BDF40A73E3DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99795CB1-0A2F-400D-9BDC-BDF40A73E3DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9273DA66-DA6F-4DD0-8240-110EDB36132A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9273DA66-DA6F-4DD0-8240-110EDB36132A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9273DA66-DA6F-4DD0-8240-110EDB36132A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9273DA66-DA6F-4DD0-8240-110EDB36132A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98D50D2C-65D0-485E-8B6B-FDCA0BB616BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98D50D2C-65D0-485E-8B6B-FDCA0BB616BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98D50D2C-65D0-485E-8B6B-FDCA0BB616BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98D50D2C-65D0-485E-8B6B-FDCA0BB616BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F41D0B87-1489-4269-986C-30F9E185DC97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F41D0B87-1489-4269-986C-30F9E185DC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F41D0B87-1489-4269-986C-30F9E185DC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F41D0B87-1489-4269-986C-30F9E185DC97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +115,11 @@ Global
 		{DD59E53A-EA47-4967-8FF4-CEC43918F23B} = {56E6CB5C-7400-44F7-B09A-87CD1CC608DC}
 		{2C2101CB-18AE-44D6-8719-D6BB43F665B4} = {D8FEA7AD-612D-4878-8A21-B9354A41916C}
 		{0B3D7AC2-DF49-4119-B71D-E0D8BFD228BE} = {2C2101CB-18AE-44D6-8719-D6BB43F665B4}
+		{99795CB1-0A2F-400D-9BDC-BDF40A73E3DA} = {D5164CF9-77F9-4A22-A443-67D457B04C8A}
+		{9273DA66-DA6F-4DD0-8240-110EDB36132A} = {D5164CF9-77F9-4A22-A443-67D457B04C8A}
+		{98D50D2C-65D0-485E-8B6B-FDCA0BB616BE} = {D5164CF9-77F9-4A22-A443-67D457B04C8A}
+		{B9A57964-04A6-4DCF-B2AD-525642C12CB1} = {9BCB2CBF-85ED-4D4C-B4A1-AA9015FBA137}
+		{F41D0B87-1489-4269-986C-30F9E185DC97} = {B9A57964-04A6-4DCF-B2AD-525642C12CB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F5E81EA-C81F-4817-AEA0-A4769D3D02F0}

@@ -12,6 +12,9 @@ namespace Reminder.BackgroundTasks
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
+                .UseHealthChecks("/hc")
+                .UseIISIntegration()
                 .UseStartup<Startup>();
     }
 }
