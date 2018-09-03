@@ -59,6 +59,8 @@ namespace Reminder.BackgroundTasks.Tasks
                     var updatedRows = reminderIds.Select(x => new {Id = x});
                     conn.Execute(sqlInsert, affectedRows);
                     conn.Execute(sqlUpdate, updatedRows);
+
+                    _logger.LogInformation($"Process Complete: Delivered {affectedRows.Count()} reminders");
                 }
                 catch (SqlException exception)
                 {

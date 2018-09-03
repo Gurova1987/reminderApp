@@ -22,8 +22,7 @@ namespace Auth.API.Controllers
         {
             _settings = settings;
         }
-
-        //POST api/[controller]/
+        
         [Route("")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Accepted)]

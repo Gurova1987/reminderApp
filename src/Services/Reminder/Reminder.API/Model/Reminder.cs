@@ -6,6 +6,8 @@ namespace Reminder.API.Model
     {
         public int Id { get; set; }
 
+        public string UserId { get; set; }
+
         public string Message { get; set; }
 
         public string EmailTo { get; set; }

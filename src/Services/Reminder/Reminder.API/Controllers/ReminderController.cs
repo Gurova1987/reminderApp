@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Reminder.API.Infrastructure;
@@ -28,6 +27,7 @@ namespace Reminder.API.Controllers
         {
             var reminderNotification = new Model.Reminder
             {
+                UserId = reminder.UserId,
                 Message = reminder.Message,
                 EmailTo = reminder.EmailTo,
                 Date = reminder.Date
@@ -41,8 +41,8 @@ namespace Reminder.API.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(Model.Reminder), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Model.Reminder), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetById(int id)
         {
             if (id <= 0)
@@ -50,21 +50,12 @@ namespace Reminder.API.Controllers
                 return BadRequest();
             }
 
-            try
-            {
-                var item = await _reminderContext.Reminders.SingleOrDefaultAsync(ci => ci.Id == id);
+            var item = await _reminderContext.Reminders.SingleOrDefaultAsync(ci => ci.Id == id);
 
-                if (item != null)
-                    return Ok(item);
+            if (item != null)
+                return Ok(item);
 
-                return NotFound();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return Ok(e);
-            }
-            
+            return NotFound();
         }
 
         [HttpGet]
