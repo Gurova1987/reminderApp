@@ -30,13 +30,10 @@
         "DurationOfBreak": 5,
         "TimeoutValue": 5000
       },
+      "ServiceName": "Reminder",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       }
-      //"ServiceName": "Reminder",
-      //"LoadBalancerOptions": {
-      //  "Type": "LeastConnection"
-      //}
     },
     {
       "DownstreamPathTemplate": "/api/{version}/{everything}",
@@ -64,13 +61,10 @@
         "DurationOfBreak": 5,
         "TimeoutValue": 5000
       },
+      "ServiceName": "User",
       "LoadBalancerOptions": {
-        "Type": "RoundRobin"
+        "Type": "LeastConnection"
       }
-      //"ServiceName": "User",
-      //"LoadBalancerOptions": {
-      //  "Type": "LeastConnection"
-      //}
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -88,23 +82,20 @@
         "DurationOfBreak": 5,
         "TimeoutValue": 5000
       },
+      "ServiceName": "Auth",
       "LoadBalancerOptions": {
-        "Type": "RoundRobin"
+        "Type": "LeastConnection"
       }
-      //"ServiceName": "Auth",
-      //"LoadBalancerOptions": {
-      //  "Type": "LeastConnection"
-      //}
     }
   ],
 
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId",
-    "AdministrationPath": "/administration"
-    //"ServiceDiscoveryProvider": {
-    //  "Host": "localhost",
-    //  "Port": 8500,
-    //  "Type": "Consul"
-    //}
+    "AdministrationPath": "/administration",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
   }
 }

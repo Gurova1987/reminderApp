@@ -49,7 +49,8 @@ namespace OcelotApiGateway
                     x.TokenValidationParameters = tokenValidationParameters;
                 });
 
-            services.AddOcelot(Configuration).AddPolly();
+            //Config Polly and Consul
+            services.AddOcelot(Configuration).AddPolly().AddConsul();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

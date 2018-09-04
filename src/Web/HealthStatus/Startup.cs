@@ -36,7 +36,8 @@ namespace HealthStatus
                     minutes = minutesParsed;
                 }
 
-                checks.AddUrlCheckIfNotNull(Configuration["ReminderUrl"], TimeSpan.FromMinutes(minutes)); 
+                checks.AddUrlCheckIfNotNull(Configuration["ReminderAUrl"], TimeSpan.FromMinutes(minutes));
+                checks.AddUrlCheckIfNotNull(Configuration["ReminderBUrl"], TimeSpan.FromMinutes(minutes));
                 checks.AddUrlCheckIfNotNull(Configuration["ReminderBackgroundTasksUrl"], TimeSpan.FromMinutes(minutes));
                 checks.AddUrlCheckIfNotNull(Configuration["AuthUrl"], TimeSpan.FromMinutes(minutes));            
                 checks.AddUrlCheckIfNotNull(Configuration["UserUrl"], TimeSpan.FromMinutes(minutes)); 
