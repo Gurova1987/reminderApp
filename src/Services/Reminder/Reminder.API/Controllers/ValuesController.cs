@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Reminder.API.Controllers
 {
@@ -7,10 +9,18 @@ namespace Reminder.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ILogger _logger;
+
+        public ValuesController(ILogger<ValuesController> logger)
+        {
+            _logger = logger;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            _logger.LogInformation($"Calling Service Log");
             return new[] { "From Service A" };
         }
 
