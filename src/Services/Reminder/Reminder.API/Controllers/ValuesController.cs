@@ -11,7 +11,7 @@ namespace Reminder.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new[] { "value1", "value2" };
+            return new[] { "From Service A" };
         }
 
         // GET api/values/5

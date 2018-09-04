@@ -7,6 +7,10 @@
         {
           "Host": "localhost",
           "Port": 9001
+        },
+        {
+          "Host": "localhost",
+          "Port": 9005
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/a/{everything}",
@@ -25,6 +29,9 @@
         "ExceptionsAllowedBeforeBreaking": 3,
         "DurationOfBreak": 5,
         "TimeoutValue": 5000
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
       }
       //"ServiceName": "Reminder",
       //"LoadBalancerOptions": {
@@ -56,6 +63,9 @@
         "ExceptionsAllowedBeforeBreaking": 3,
         "DurationOfBreak": 5,
         "TimeoutValue": 5000
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
       }
       //"ServiceName": "User",
       //"LoadBalancerOptions": {
@@ -77,17 +87,20 @@
         "ExceptionsAllowedBeforeBreaking": 3,
         "DurationOfBreak": 5,
         "TimeoutValue": 5000
+      },
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
       }
       //"ServiceName": "Auth",
       //"LoadBalancerOptions": {
       //  "Type": "LeastConnection"
       //}
     }
-
   ],
+
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId",
-    "AdministrationPath": "/administration",
+    "AdministrationPath": "/administration"
     //"ServiceDiscoveryProvider": {
     //  "Host": "localhost",
     //  "Port": 8500,
