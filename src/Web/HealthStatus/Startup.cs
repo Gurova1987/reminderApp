@@ -40,7 +40,8 @@ namespace HealthStatus
                 checks.AddUrlCheckIfNotNull(Configuration["ReminderBUrl"], TimeSpan.FromMinutes(minutes));
                 checks.AddUrlCheckIfNotNull(Configuration["ReminderBackgroundTasksUrl"], TimeSpan.FromMinutes(minutes));
                 checks.AddUrlCheckIfNotNull(Configuration["AuthUrl"], TimeSpan.FromMinutes(minutes));            
-                checks.AddUrlCheckIfNotNull(Configuration["UserUrl"], TimeSpan.FromMinutes(minutes)); 
+                checks.AddUrlCheckIfNotNull(Configuration["UserUrl"], TimeSpan.FromMinutes(minutes));
+                checks.AddUrlCheckIfNotNull(Configuration["AuthUserAggregator"], TimeSpan.FromMinutes(minutes));
             });
 
             services.AddMvc();

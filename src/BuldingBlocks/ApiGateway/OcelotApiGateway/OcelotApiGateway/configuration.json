@@ -63,7 +63,7 @@
       },
       "ServiceName": "User",
       "LoadBalancerOptions": {
-        "Type": "LeastConnection"
+        "Type": "RoundRobin"
       }
     },
     {
@@ -84,7 +84,29 @@
       },
       "ServiceName": "Auth",
       "LoadBalancerOptions": {
-        "Type": "LeastConnection"
+        "Type": "RoundRobin"
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9006
+        }
+      ],
+      "UpstreamPathTemplate": "/d/api/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 5,
+        "TimeoutValue": 5000
+      },
+      "ServiceName": "AuthUserAggregator",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
       }
     }
   ],

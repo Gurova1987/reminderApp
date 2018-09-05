@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.BackgroundTasks.te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.tests", "src\Services\Auth\Auth.tests\Auth.tests.csproj", "{F44CD0DC-9910-42E9-867C-9C51B216DD60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFF.Auth.User", "src\BuldingBlocks\ApiGateway\BFF.Auth.User\BFF.Auth.User\BFF.Auth.User.csproj", "{72C352BA-4738-4DF8-B702-E5695FBED5E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +121,10 @@ Global
 		{F44CD0DC-9910-42E9-867C-9C51B216DD60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F44CD0DC-9910-42E9-867C-9C51B216DD60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F44CD0DC-9910-42E9-867C-9C51B216DD60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C352BA-4738-4DF8-B702-E5695FBED5E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C352BA-4738-4DF8-B702-E5695FBED5E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C352BA-4738-4DF8-B702-E5695FBED5E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C352BA-4738-4DF8-B702-E5695FBED5E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{E0535941-D930-4B2F-9885-A41E0F789301} = {2C2101CB-18AE-44D6-8719-D6BB43F665B4}
 		{F36C9E06-DE5B-452D-A4C2-F2BA2E75E8C2} = {3762CF2D-5492-49F5-99D8-FCF167834AA5}
 		{F44CD0DC-9910-42E9-867C-9C51B216DD60} = {56E6CB5C-7400-44F7-B09A-87CD1CC608DC}
+		{72C352BA-4738-4DF8-B702-E5695FBED5E9} = {E9FD3116-30A5-4756-9F09-846EFBF4C563}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F5E81EA-C81F-4817-AEA0-A4769D3D02F0}

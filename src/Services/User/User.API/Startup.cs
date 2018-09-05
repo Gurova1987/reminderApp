@@ -106,7 +106,7 @@ namespace User.API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("../swagger/v1/swagger.json", "Reminder API V1");
+                c.SwaggerEndpoint("../swagger/v1/swagger.json", "User API V1");
             });
             app.UseAuthentication();
             ConfigureEventBus(app);

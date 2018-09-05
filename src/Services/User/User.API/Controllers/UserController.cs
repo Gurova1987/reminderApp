@@ -24,7 +24,7 @@ namespace User.API.Controllers
         [Route("")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<IActionResult> CreateReminder([FromBody]Models.User user)
+        public async Task<IActionResult> CreateUser([FromBody]Models.User user)
         {
             var newUser = new Models.User
             {
